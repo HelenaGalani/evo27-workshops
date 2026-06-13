@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVO Moderator's Roadmap - Workshop 2</title>
+<style>
+  :root{--bg1:#ffffff;--bg2:#f5f5f0;--bg-info:#E6F1FB;--bg-success:#EAF3DE;--bg-warn:#FAEEDA;--t1:#2C2C2A;--t2:#5F5E5A;--t-info:#185FA5;--t-success:#3B6D11;--t-warn:#854F0B;--b1:rgba(0,0,0,0.15);--b2:rgba(0,0,0,0.3);--b-info:#85B7EB;--font:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+  @media(prefers-color-scheme:dark){:root{--bg1:#1a1a1a;--bg2:#2a2a28;--bg-info:#042C53;--bg-success:#173404;--bg-warn:#412402;--t1:#e8e6dd;--t2:#9c9a92;--t-info:#85B7EB;--t-success:#97C459;--t-warn:#FAC775;--b1:rgba(255,255,255,0.15);--b2:rgba(255,255,255,0.3);--b-info:#378ADD}}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font);color:var(--t1);background:var(--bg1);line-height:1.6;max-width:720px;margin:0 auto;padding:24px 20px}
+  .step{display:none}.step.active{display:block}
+  .nav{display:flex;gap:8px;align-items:center;justify-content:center;margin:1.5rem 0 0}
+  .dots{display:flex;gap:6px;align-items:center}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--b1);transition:all .2s;cursor:pointer;border:none}
+  .dot.active{background:var(--t-info);width:10px;height:10px}
+  .sl{font-size:12px;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;margin:0 0 4px}
+  .st{font-size:20px;font-weight:600;margin:0 0 4px}
+  .ss{font-size:14px;color:var(--t2);margin:0 0 16px}
+  .prop-list{display:flex;flex-direction:column;gap:4px;margin:12px 0}
+  .prop-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;font-size:13px;background:var(--bg2)}
+  .prop-item.highlight{background:var(--bg-info);border:1px solid var(--b-info)}
+  .prop-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .pi-done{background:var(--bg-success);color:var(--t-success)}
+  .pi-focus{background:var(--bg-info);color:var(--t-info)}
+  .pi-other{background:var(--bg2);color:var(--t2)}
+  .pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:500}
+  .vs-container{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:start;margin:12px 0}
+  @media(max-width:500px){.vs-container{grid-template-columns:1fr;}.vs-divider{transform:rotate(90deg);justify-content:center;padding:0}}
+  .vs-card{border-radius:12px;padding:14px;font-size:13px}
+  .vs-trad{background:var(--bg2);border:1px solid var(--b1)}
+  .vs-evo{background:var(--bg-info);border:1px solid var(--b-info)}
+  .vs-title{font-weight:600;font-size:14px;margin:0 0 10px}
+  .vs-item{display:flex;align-items:flex-start;gap:6px;margin:5px 0;line-height:1.4}
+  .vs-dot{width:6px;height:6px;border-radius:50%;margin-top:6px;flex-shrink:0}
+  .vs-divider{display:flex;align-items:center;font-size:20px;color:var(--t2);padding-top:40px}
+  .callout{border-radius:8px;padding:12px 14px;font-size:13px;line-height:1.5;margin:10px 0}
+  .callout-info{background:var(--bg-info)}
+  .callout-warn{background:var(--bg-warn)}
+  .week-card{background:var(--bg2);border-radius:12px;padding:14px;margin:8px 0}
+  .week-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+  .week-num{width:28px;height:28px;border-radius:50%;background:var(--bg-info);color:var(--t-info);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;flex-shrink:0}
+  .week-title{font-weight:600;font-size:14px}
+  .comp-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px;margin:4px 0}
+  .comp-chip{padding:6px 10px;border-radius:8px;font-size:12px;line-height:1.3}
+  .cc-focus{background:var(--bg-info);color:var(--t-info)}
+  .cc-obj{background:var(--bg-success);color:var(--t-success)}
+  .cc-task{background:var(--bg-warn);color:var(--t-warn)}
+  .arrow-down{text-align:center;font-size:18px;color:var(--t2);margin:6px 0}
+  .rubric-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+  @media(max-width:500px){.rubric-grid{grid-template-columns:1fr}}
+  .rubric-item{background:var(--bg2);border-radius:8px;padding:10px 12px}
+  .rubric-title{font-weight:600;font-size:13px;margin:0 0 4px;display:flex;align-items:center;gap:6px}
+  .rubric-desc{font-size:12px;color:var(--t2);line-height:1.4;margin:0}
+  .rubric-score{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:600;flex-shrink:0;background:var(--bg-success);color:var(--t-success)}
+  .check-item{display:flex;align-items:flex-start;gap:8px;margin:6px 0;font-size:14px;line-height:1.5}
+  .check-icon{color:var(--t-success);flex-shrink:0;margin-top:2px}
+  .ws-track{display:flex;gap:0;align-items:center;margin:16px 0;flex-wrap:wrap}
+  .ws-box{flex:1;padding:10px;text-align:center;font-size:13px;border:1px solid var(--b1);min-width:100px}
+  .ws-box:first-child{border-radius:8px 0 0 8px}
+  .ws-box:last-child{border-radius:0 8px 8px 0}
+  .ws-box.done{background:var(--bg-success)}
+  .ws-box.current{background:var(--bg-info);border-color:var(--b-info)}
+  .ws-box .ws-t{font-weight:600;font-size:12px}
+  .ws-box .ws-s{font-size:11px;color:var(--t2);margin-top:2px}
+  .arrow-between{font-size:16px;color:var(--t2);flex-shrink:0}
+  .task-box{background:var(--bg-warn);border-radius:8px;padding:12px 14px;margin:12px 0;font-size:13px;line-height:1.5}
+  .btn{padding:6px 14px;font-size:13px;border:1px solid var(--b2);background:transparent;border-radius:8px;cursor:pointer;color:var(--t1);font-family:var(--font)}
+  .btn:hover{background:var(--bg2)}
+  .btn:disabled{opacity:.4;cursor:default}
+  .btn:disabled:hover{background:transparent}
+  svg text.th{font-family:var(--font);font-size:14px;font-weight:600;fill:var(--t1)}
+  svg text.ts{font-family:var(--font);font-size:12px;fill:var(--t2)}
+  .footer{text-align:center;margin-top:24px;font-size:11px;color:var(--t2)}
+</style>
+</head>
+<body>
+
+<div id="s0" class="step active">
+  <p class="sl">EVO pre-submission workshop series</p>
+  <p class="st">The moderator's roadmap</p>
+  <p class="ss">Where we are and where we're going</p>
+  <div class="ws-track">
+    <div class="ws-box done"><div class="ws-t">Workshop 1</div><div class="ws-s">Idea to design</div></div>
+    <span class="arrow-between">&#9654;</span>
+    <div class="ws-box current"><div class="ws-t">Workshop 2</div><div class="ws-s">Syllabus design</div></div>
+    <span class="arrow-between">&#9654;</span>
+    <div class="ws-box"><div class="ws-t">Workshop 3</div><div class="ws-s">Alignment + readiness</div></div>
+  </div>
+  <p style="font-size:14px;color:var(--t2);line-height:1.6;margin-top:16px">In Workshop 1, you moved from a session idea to a session design. Today, you'll build the learning roadmap that turns that design into a structured, feasible syllabus.</p>
+</div>
+
+<div id="s1" class="step">
+  <p class="sl">Quick recap</p>
+  <p class="st">What you accomplished in Workshop 1</p>
+  <p class="ss">From idea to design: the foundation is in place</p>
+  <div class="check-item"><span class="check-icon">&#10003;</span><span>Understood the EVO proposal as a <strong>design document</strong>, not just a form to fill in</span></div>
+  <div class="check-item"><span class="check-icon">&#10003;</span><span>Distinguished between a <strong>session idea</strong> and a <strong>session design</strong></span></div>
+  <div class="check-item"><span class="check-icon">&#10003;</span><span>Identified the <strong>core components</strong> of a strong EVO proposal</span></div>
+  <div class="check-item"><span class="check-icon">&#10003;</span><span>Spotted <strong>common weaknesses</strong> in early-stage proposals</span></div>
+  <div class="check-item"><span class="check-icon">&#10003;</span><span>Drafted your <strong>session purpose, target audience, and session outcomes</strong></span></div>
+</div>
+
+<div id="s2" class="step">
+  <p class="sl">Follow-up task</p>
+  <p class="st">What you brought to today's workshop</p>
+  <p class="ss">Your Workshop 1 reflection notes are today's starting point</p>
+  <div class="task-box">
+    <p style="font-weight:600;margin:0 0 8px">&#128203; Your session framing notes</p>
+    <div class="check-item" style="margin:4px 0"><span style="color:var(--t-warn);flex-shrink:0">&#9679;</span><span>What is my session really about?</span></div>
+    <div class="check-item" style="margin:4px 0"><span style="color:var(--t-warn);flex-shrink:0">&#9679;</span><span>Who is it for?</span></div>
+    <div class="check-item" style="margin:4px 0"><span style="color:var(--t-warn);flex-shrink:0">&#9679;</span><span>What change or learning should happen?</span></div>
+    <div class="check-item" style="margin:4px 0"><span style="color:var(--t-warn);flex-shrink:0">&#9679;</span><span>Draft session outcomes (refined with AI in item 7)</span></div>
+  </div>
+  <p style="font-size:13px;color:var(--t2);line-height:1.5;margin-top:12px">Today, these notes become the foundation for your syllabus. You'll build outward from your session outcomes into weekly focuses, objectives, tasks, tools, and more.</p>
+</div>
+
+<div id="s3" class="step">
+  <p class="sl">The EVO proposal at a glance</p>
+  <p class="st">Your proposal is a design document</p>
+  <p class="ss">The syllabus is its operational core</p>
+  <div class="prop-list">
+    <div class="prop-item"><span class="prop-icon pi-done">&#10003;</span>Session title</div>
+    <div class="prop-item"><span class="prop-icon pi-done">&#10003;</span>Session logo</div>
+    <div class="prop-item"><span class="prop-icon pi-done">&#10003;</span>Target audience</div>
+    <div class="prop-item"><span class="prop-icon pi-done">&#10003;</span>Abstract (max 50 words)</div>
+    <div class="prop-item"><span class="prop-icon pi-done">&#10003;</span>Session outcomes (SMART)</div>
+    <div class="prop-item highlight"><span class="prop-icon pi-focus">&#9733;</span><strong>Session syllabus (4-week plan)</strong> <span class="pill" style="background:var(--bg-info);color:var(--t-info);margin-left:6px">Today's focus</span></div>
+    <div class="prop-item"><span class="prop-icon pi-other">&#8226;</span>LMS and communication plan</div>
+    <div class="prop-item"><span class="prop-icon pi-other">&#8226;</span>Materials and references</div>
+    <div class="prop-item"><span class="prop-icon pi-other">&#8226;</span>AI use disclosure and policy</div>
+    <div class="prop-item"><span class="prop-icon pi-other">&#8226;</span>Moderator information</div>
+  </div>
+</div>
+
+<div id="s4" class="step">
+  <p class="sl">What makes the EVO syllabus different</p>
+  <p class="st">Not a traditional syllabus</p>
+  <p class="ss">The EVO syllabus is a learning roadmap, not a course policy document</p>
+  <div class="vs-container">
+    <div class="vs-card vs-trad">
+      <p class="vs-title">&#128196; Traditional syllabus</p>
+      <div class="vs-item"><span class="vs-dot" style="background:var(--t2)"></span><span>Instructor info and office hours</span></div>
+      <div class="vs-item"><span class="vs-dot" style="background:var(--t2)"></span><span>Course overview and topics</span></div>
+      <div class="vs-item"><span class="vs-dot" style="background:var(--t2)"></span><span>Required textbooks and materials</span></div>
+      <div class="vs-item"><span class="vs-dot" style="background:var(--t2)"></span><span>Grading policy and breakdown</span></div>
+      <div class="vs-item"><span class="vs-dot" style="background:var(--t2)"></span><span>Schedule of exams and deadlines</span></div>
+      <div class="callout callout-warn" style="margin-top:10px"><strong>Focus:</strong> What the course covers and how students are graded</div>
+    </div>
+    <div class="vs-divider">&#8596;</div>
+    <div class="vs-card vs-evo">
+      <p class="vs-title">&#128506; EVO session syllabus</p>
+      <div class="vs-item"><span class="vs-dot" style="background:var(--t-info)"></span><span>Weekly focus and progression</span></div>
+      <div class="vs-item"><span class="vs-dot" style="background:var(--t-info)"></span><span>Weekly learning objectives</span></div>
+      <div class="vs-item"><span class="vs-dot" style="background:var(--t-info)"></span><span>Tasks that support the objectives</span></div>
+      <div class="vs-item"><span class="vs-dot" style="background:var(--t-info)"></span><span>Tools chosen for pedagogical purpose</span></div>
+      <div class="vs-item"><span class="vs-dot" style="background:var(--t-info)"></span><span>Interaction type and workload</span></div>
+      <div class="callout callout-info" style="margin-top:10px"><strong>Focus:</strong> How learning happens, week by week, toward the session outcomes</div>
+    </div>
+  </div>
+</div>
+
+<div id="s5" class="step">
+  <p class="sl">Inside each week</p>
+  <p class="st">The six components of every syllabus week</p>
+  <p class="ss">Each component has a role and connects to the others</p>
+  <svg width="100%" viewBox="0 0 680 390" xmlns="http://www.w3.org/2000/svg">
+    <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+    <rect x="200" y="10" width="280" height="38" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+    <text class="th" x="340" y="29" text-anchor="middle" dominant-baseline="central" fill="#3C3489">Session outcomes</text>
+    <line x1="340" y1="48" x2="340" y2="72" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+    <rect x="60" y="74" width="560" height="296" rx="16" fill="none" stroke="#B4B2A9" stroke-width="0.5" stroke-dasharray="4 3"/>
+    <text class="ts" x="340" y="92" text-anchor="middle">One week of your EVO session</text>
+    <rect x="200" y="104" width="280" height="38" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+    <text class="th" x="340" y="123" text-anchor="middle" dominant-baseline="central" fill="#085041">Weekly focus</text>
+    <text class="ts" x="502" y="123" text-anchor="start">What this week is about</text>
+    <line x1="340" y1="142" x2="340" y2="162" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+    <rect x="200" y="164" width="280" height="38" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+    <text class="th" x="340" y="183" text-anchor="middle" dominant-baseline="central" fill="#085041">Weekly objectives</text>
+    <text class="ts" x="502" y="183" text-anchor="start">What participants will do</text>
+    <line x1="340" y1="202" x2="340" y2="222" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+    <rect x="200" y="224" width="280" height="38" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+    <text class="th" x="340" y="243" text-anchor="middle" dominant-baseline="central" fill="#712B13">Tasks</text>
+    <text class="ts" x="502" y="243" text-anchor="start">Evidence of learning</text>
+    <line x1="240" y1="262" x2="140" y2="292" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+    <line x1="340" y1="262" x2="340" y2="292" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+    <line x1="440" y1="262" x2="540" y2="292" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+    <rect x="80" y="294" width="120" height="52" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+    <text class="th" x="140" y="312" text-anchor="middle" dominant-baseline="central" fill="#633806">Tools</text>
+    <text class="ts" x="140" y="332" text-anchor="middle" dominant-baseline="central">Purposeful</text>
+    <rect x="280" y="294" width="120" height="52" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+    <text class="th" x="340" y="312" text-anchor="middle" dominant-baseline="central" fill="#633806">Interaction</text>
+    <text class="ts" x="340" y="332" text-anchor="middle" dominant-baseline="central">Meaningful</text>
+    <rect x="480" y="294" width="120" height="52" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+    <text class="th" x="540" y="312" text-anchor="middle" dominant-baseline="central" fill="#633806">Workload</text>
+    <text class="ts" x="540" y="332" text-anchor="middle" dominant-baseline="central">Realistic</text>
+  </svg>
+  <p style="font-size:13px;color:var(--t2);margin-top:4px">Optional: live sessions, when planned, should support the weekly objectives and tasks.</p>
+</div>
+
+<div id="s6" class="step">
+  <p class="sl">The 4-week journey</p>
+  <p class="st">A logical progression toward the session outcomes</p>
+  <p class="ss">Each week builds on the previous, from foundation to application</p>
+  <div class="week-card">
+    <div class="week-head"><span class="week-num">1</span><span class="week-title">Foundation</span><span class="pill" style="background:var(--bg-success);color:var(--t-success);margin-left:auto">Jan 10 - 16</span></div>
+    <div class="comp-row">
+      <div class="comp-chip cc-focus">&#127919; Community + orientation</div>
+      <div class="comp-chip cc-obj">&#9745; Navigate + connect</div>
+      <div class="comp-chip cc-task">&#128203; Introductions + exploration</div>
+    </div>
+  </div>
+  <div class="arrow-down">&#9660;</div>
+  <div class="week-card">
+    <div class="week-head"><span class="week-num">2</span><span class="week-title">Understanding</span><span class="pill" style="background:var(--bg-success);color:var(--t-success);margin-left:auto">Jan 17 - 23</span></div>
+    <div class="comp-row">
+      <div class="comp-chip cc-focus">&#127919; Core concepts + knowledge</div>
+      <div class="comp-chip cc-obj">&#9745; Identify + analyse</div>
+      <div class="comp-chip cc-task">&#128203; Research + comparison</div>
+    </div>
+  </div>
+  <div class="arrow-down">&#9660;</div>
+  <div class="week-card">
+    <div class="week-head"><span class="week-num">3</span><span class="week-title">Application</span><span class="pill" style="background:var(--bg-success);color:var(--t-success);margin-left:auto">Jan 24 - 30</span></div>
+    <div class="comp-row">
+      <div class="comp-chip cc-focus">&#127919; Skill building + practice</div>
+      <div class="comp-chip cc-obj">&#9745; Design + create</div>
+      <div class="comp-chip cc-task">&#128203; Production + peer exchange</div>
+    </div>
+  </div>
+  <div class="arrow-down">&#9660;</div>
+  <div class="week-card">
+    <div class="week-head"><span class="week-num">4</span><span class="week-title">Integration</span><span class="pill" style="background:var(--bg-success);color:var(--t-success);margin-left:auto">Jan 30 - Feb 6</span></div>
+    <div class="comp-row">
+      <div class="comp-chip cc-focus">&#127919; Synthesis + reflection</div>
+      <div class="comp-chip cc-obj">&#9745; Apply + evaluate</div>
+      <div class="comp-chip cc-task">&#128203; Final product + reflection</div>
+    </div>
+  </div>
+</div>
+
+<div id="s7" class="step">
+  <p class="sl">How your syllabus is evaluated</p>
+  <p class="st">The vetting rubric: what vetters look for</p>
+  <p class="ss">13 criteria, scored 0 to 3. You need 32/39 (80%) for acceptance.</p>
+  <div class="rubric-grid">
+    <div class="rubric-item"><p class="rubric-title"><span class="rubric-score">3</span> Session outcomes</p><p class="rubric-desc">Clear, measurable, achievable, relevant for a 4-week EVO session</p></div>
+    <div class="rubric-item"><p class="rubric-title"><span class="rubric-score">3</span> Weekly objectives</p><p class="rubric-desc">Specific, measurable, achievable, and support the session outcomes</p></div>
+    <div class="rubric-item"><p class="rubric-title"><span class="rubric-score">3</span> Weekly tasks</p><p class="rubric-desc">Meaningful, active, clearly connected to the weekly objectives</p></div>
+    <div class="rubric-item"><p class="rubric-title"><span class="rubric-score">3</span> Workload and feasibility</p><p class="rubric-desc">Realistic, balanced across four weeks, manageable for participants</p></div>
+    <div class="rubric-item"><p class="rubric-title"><span class="rubric-score">3</span> Learning spaces and tools</p><p class="rubric-desc">Clear purpose, directly support objectives and tasks</p></div>
+    <div class="rubric-item"><p class="rubric-title"><span class="rubric-score">3</span> Alignment and coherence</p><p class="rubric-desc">Logical progression, clear weekly focus, sequence supports learning</p></div>
+  </div>
+  <div class="callout callout-info"><strong>Key insight:</strong> The rubric does not just evaluate individual components. It evaluates how well they connect. A syllabus with clear objectives but disconnected tasks will score lower on alignment, even if each part looks fine on its own.</div>
+</div>
+
+<div id="s8" class="step">
+  <p class="sl">The design principle</p>
+  <p class="st">Build backward from your session outcomes</p>
+  <p class="ss">The syllabus is the plan that turns outcomes into a learning journey</p>
+  <svg width="100%" viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg">
+    <defs><marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+    <rect x="40" y="30" width="170" height="80" rx="12" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+    <text class="th" x="125" y="58" text-anchor="middle" dominant-baseline="central" fill="#3C3489">Start here</text>
+    <text class="ts" x="125" y="80" text-anchor="middle" dominant-baseline="central">Session outcomes</text>
+    <line x1="210" y1="70" x2="248" y2="70" stroke="#888780" stroke-width="1" marker-end="url(#a2)"/>
+    <rect x="252" y="30" width="170" height="80" rx="12" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+    <text class="th" x="337" y="58" text-anchor="middle" dominant-baseline="central" fill="#085041">Then design</text>
+    <text class="ts" x="337" y="80" text-anchor="middle" dominant-baseline="central">Weekly journey</text>
+    <line x1="422" y1="70" x2="460" y2="70" stroke="#888780" stroke-width="1" marker-end="url(#a2)"/>
+    <rect x="464" y="30" width="170" height="80" rx="12" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+    <text class="th" x="549" y="58" text-anchor="middle" dominant-baseline="central" fill="#712B13">Then support</text>
+    <text class="ts" x="549" y="80" text-anchor="middle" dominant-baseline="central">Tools + workload</text>
+    <text class="ts" x="125" y="140" text-anchor="middle">What should participants</text>
+    <text class="ts" x="125" y="156" text-anchor="middle">be able to do?</text>
+    <text class="ts" x="337" y="140" text-anchor="middle">How will they get there,</text>
+    <text class="ts" x="337" y="156" text-anchor="middle">week by week?</text>
+    <text class="ts" x="549" y="140" text-anchor="middle">What tools and time</text>
+    <text class="ts" x="549" y="156" text-anchor="middle">do they need?</text>
+    <line x1="40" y1="185" x2="634" y2="185" stroke="#B4B2A9" stroke-width="0.5" stroke-dasharray="4 3"/>
+    <text class="ts" x="340" y="210" text-anchor="middle">The syllabus is not a content list. It is the plan that makes</text>
+    <text class="ts" x="340" y="228" text-anchor="middle">the difference between a session that works and one that falls apart.</text>
+  </svg>
+</div>
+
+<div class="nav">
+  <button class="btn" onclick="go(-1)" id="pb" disabled>&#9664; Back</button>
+  <div class="dots" id="dots"></div>
+  <button class="btn" onclick="go(1)" id="nb">Next &#9654;</button>
+</div>
+
+<p class="footer">EVO Pre-Submission Workshop Series 2027</p>
+
+<script>
+const N=9;let c=0;const d=document.getElementById('dots');
+for(let i=0;i<N;i++){const s=document.createElement('span');s.className='dot'+(i===0?' active':'');s.onclick=()=>sh(i);d.appendChild(s)}
+function sh(n){document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));document.getElementById('s'+n).classList.add('active');document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===n));c=n;document.getElementById('pb').disabled=n===0;document.getElementById('nb').disabled=n===N-1}
+function go(dir){if(c+dir>=0&&c+dir<N)sh(c+dir)}
+</script>
+
+</body>
+</html>
