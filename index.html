@@ -297,6 +297,10 @@ for(let i=0;i<N;i++){const s=document.createElement('span');s.className='dot'+(i
 function sh(n){document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));document.getElementById('s'+n).classList.add('active');document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===n));c=n;document.getElementById('pb').disabled=n===0;document.getElementById('nb').disabled=n===N-1}
 function go(dir){if(c+dir>=0&&c+dir<N)sh(c+dir)}
 </script>
+<footer style="text-align: center; padding: 20px; font-size: 14px; color: #555; border-top: 1px solid #ddd; margin-top: 40px;">
+    <p>© 2026 Helena Galani. All rights reserved.</p>
+    <p style="font-size: 12px; color: #777;">Commercial use, reproduction, or modification of this syllabus and code is strictly prohibited.</p>
+</footer>
 
 </body>
 </html>
